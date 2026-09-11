@@ -10,11 +10,16 @@ void setup() {
 
     WiFi.begin("<Wifi-SSID>", "<Wifi-Password>"); // Connect to Wi-Fi
 
-    delay(1000);
+    while(WiFi.status() != WL_CONNECTED) { // Wait for connection
+        delay(500);
+        Serial.print(".");
+    }
 
-    digitalWrite(STATUS_LED, HIGH); // Show connection status
+    Serial.println();
     Serial.println("Wifi connected.");
-    Serial.println("IP address: " + WiFi.localIP().toString());
+    digitalWrite(STATUS_LED, HIGH); // Show connection status
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
 
 }
 
